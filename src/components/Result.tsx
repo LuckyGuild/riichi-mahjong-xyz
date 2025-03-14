@@ -1,4 +1,6 @@
 // src/components/Result.tsx
+// The MIT License (MIT)
+// Copyright 2021 livewing.net
 import { useTranslation } from 'react-i18next';
 import { compareTiles } from '../lib/tile';
 import { sumBy } from '../lib/util';
