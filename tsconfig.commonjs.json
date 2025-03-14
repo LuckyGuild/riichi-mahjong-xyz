@@ -1,0 +1,13 @@
+// tsconfig.commonjs.json
+{
+  //"extends": "@tsconfig/strictest/tsconfig.json",
+  "compilerOptions": {
+    "module": "commonjs",
+    "noPropertyAccessFromIndexSignature": false,
+    "skipLibCheck": true,
+    "noEmit": true,
+    "strict": true,
+    "esModuleInterop": true
+  },
+  "files": ["./webpack.config.ts"]
+}

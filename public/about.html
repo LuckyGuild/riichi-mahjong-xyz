@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta property="og:title" content="Riichi Mahjong Trainer">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://riichimahjong.xyz/">
+    <meta property="og:description" content="Riichi Mahjong Trainer for scoring and efficiency. Are you unlucky or skill">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/favicon-16x16.png">
+    <link rel="manifest" href="./assets/site.webmanifest">
+    <title>Mahjong Trainer</title>
+    <style>
+        body {
+            font-family: "Source Code Pro", system-ui, sans-serif;
+            font-size: 16px;
+            line-height: 1.7;
+            padding: 0;
+            margin: 0;
+            background-color: #020617;
+            color: #f8fafc;
+        }
+        
+        em {
+            font-style: italic;
+        }
+
+        strong {
+            font-weight: 700; 
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            line-height: 2;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        h2 {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+            font-weight: 700;
+            margin-top: 0;
+            margin-bottom: 0.75rem;
+        }
+
+        a {
+        text-decoration: none; /* Remove underlines by default */
+        color: inherit;       /* Inherit text color from parent (optional, but good practice) */
+        }
+
+        a:hover {
+        text-decoration: underline; /* Add underline on hover */
+        color: #00CDFE;      /* Change text color to powderblue on hover */
+        }
+
+        .container {
+            padding-left: 3rem;
+            padding-right: 3rem;
+            /* adjust to offset from side of pages */
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 3rem;
+        }
+
+        /* Grid Layout Reference */
+        .content-grid {
+            --padding-inline: 1rem;
+            --content-max-width: 50ch;
+            --breakout-max-width: 75ch;
+            --breakout-size: calc((var(--breakout-max-width) - var(--content-max-width)) / 2);
+
+            display: grid;
+            grid-template-columns:
+                [full-width-start] minmax(var(--padding-inline), 1fr)
+                [breakout-start] minmax(0, var(--breakout-size))
+                [content-start] min(50% - (var(--padding-inline) * 2), var(--content-max-width)/2)
+                [main-half] min(50% - (var(--padding-inline) * 2), var(--content-max-width)/2)
+                [content-end] minmax(0, var(--breakout-size)) 
+                [breakout-end] minmax(var(--padding-inline), 1fr)
+                [full-width-end];
+            
+            gap: 1rem;
+        }
+
+        /* Demonstration Styles */
+        .full-width {
+            grid-column: full-width-start / full-width-end;
+        }
+
+        .breakout {
+            grid-column: breakout-start / breakout-end;
+        }
+
+        .content {
+            grid-column: content-start / content-end;
+        }
+
+        .main-half-start {
+            grid-column: content-start / main-half;
+        }
+
+        .main-half-end {
+            grid-column: main-half / content-end;
+        }
+        
+        .breakout-start-to-content-end {
+            grid-column: breakout-start / content-end;
+        }
+        
+        .content-start-to-breakout-end {
+            grid-column: content-start / breakout-end;
+        }
+        
+        .breakout-start-to-main-half {
+            grid-column: breakout-start / main-half;
+        }
+        
+        .main-half-to-breakout-end {
+            grid-column: main-half / breakout-end;
+        }
+
+        pre {
+            background-color: #0f172a;
+            color: #f8fafc;
+            overflow-x: auto;
+        }
+        
+        .content-grid > h1,
+        .content-grid > h2,
+        .content-grid > p {
+            grid-column: breakout-start / breakout-end; /* Makes elements span from breakout-start to breakout-end */
+            justify-self: start; /* Left-aligns the element within its grid cell */
+            text-align: left; /* Ensures text inside is also left-aligned */
+        }
+    </style>
+</head>
+<body>
+        <!-- Nav Bar -->
+        <div style="background-color: #1e293b; border-bottom: 1px solid #334155; width: 100vw; margin-left: calc(-50vw + 50%); margin-right: calc(-50vw + 50%); position: relative; left: 1; right: 1;">
+            <div style="max-width: 1200px; margin-left: auto; margin-right: auto; padding-left: 3rem; padding-right: 3rem;">
+                <div style="display: flex; justify-content: space-between; align-items: center; height: 64px;">
+                    <div style="font-size: 1.25rem; line-height: 2; font-weight: 700; display: flex; align-items: center;">
+                        Riichi Mahjong Trainer
+                    </div>
+                    <div style="display: flex; margin-left: 1.5rem; gap: 2rem;">
+                        <a href="/home.html" target="_blank" rel="noopener noreferrer">HOME</a>
+                        <a href="/app.html" target="_blank" rel="noopener noreferrer">PLAY</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="container">
+        
+        <div class="content-grid">
+            <!-- <h1>Header 1</h1> -->
+            <h2>Quest to S-Class</h2>
+            <p>The annual mahjong tournament is coming up, where the best will gather once a year to see who has the most skill (and luck). It’s the only chance for players to rank up in class and a step closer toward one day being able to play in the Pro League. I’ve been stuck at C-Rank for a couple of years. There’s brief moments where I’m able to get into a flow state and am able to read the future but I can never get it to stick or call it on command. I’ve played thousands of games, but my weakness is calculating the scoring and payment system. I’ve been told to track down the Lucky Guild to improve my skills. The Training Arc begins now.</p>
+
+            <figure style="grid-column: full-width-start / full-width-end; text-align: center;">
+                <img src="assets/guildhouse.jpg" alt="exterior of lucky guild bldg" style="max-width: 70%; ">
+                <figcaption style="font-style: italic; color: #94a3b8; ">Welcome to the Lucky Guild</figcaption>
+            </figure>
+            
+            <div class="breakout-start-to-main-half">
+                Ohayou Adventurer, I see you're new here. This place is a great place to learn tile efficiency and memorize the scoring calculation. Instead of taking 30min to play an east-round you can breeze through a game in 5min since you'll be playing against auto-discarders. I know I know, you won't learn defense here but becoming elite means having a strong foundation. Once you can do tile efficiency <em>subconsciously</em> and predict your final score, you can decide whether to push or to fold.
+            </div>
+
+            <br>
+            <div class="main-half-to-breakout-end">
+                I haven't played mahjong before in-person. I mostly hang around MJSpirit but when I'm counting my tiles and shanten, they start glaring at me impatiently <img src="assets/angrychibi.jpg" alt="impatient chibi girl" style="height: 2em; width: auto; vertical-align: text-top;"> 
+            </div>
+
+            <br>
+            <div class="breakout-start-to-main-half">
+                The game is built out of an old Konami Mahjong Fight Club Cabinet. Inspired by an older game from Euophrys but uses a motherboard from 
+                <a href="https://pathofhouou.blogspot.com/2021/01/analysis-rates-by-starting-shanten.html" target="_blank" rel="noopener noreferrer">
+                    livewing.net
+                </a>. It's improved to simulate an actual mahjong game by making you look at the discards to count the ukeire. Pay attention to how the deadwall looks based on the dice and how many walls there are as the tiles decrease. How the melds are rotated and placed depending on who you stole from. It won't tell you exactly what to do when you are able to open your hand, it only asks <em>"are you sure"</em>. Click the NEXT button to pass and continue the game. There are many people who come to Lucky Guild because they don't have any irl people to play with. <img src="assets/nochingu.jpg" alt="impatient chibi girl" style="height: 4em; width: auto; vertical-align: text-top;"> 
+            </div>
+            
+            <br>
+            <div class="main-half-to-breakout-end">
+                I usually play in english even though I should improve my 日本語. After I get B-rank I want to travel to Japan and visit the Marchao and Octagon Jansou. 
+            </div>
+
+            <br>
+            <div class="breakout-start-to-content-end">
+                There is some kanji to help you memorize them.
+                <br>
+              
+                <table style="border-collapse: collapse; background-color: #0f172a; display: inline-table;">
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Riichi</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">リーチ</td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Kan</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">カン</td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Pon</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">ポン</td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Chii</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">チー</td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Ron</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">ロン</td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Tsumo</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">ツモ</td>
+                  </tr>
+                </table>
+              
+                <table style="border-collapse: collapse; background-color: #0f172a; display: inline-table; margin-left: 10px;">
+                  <tr>
+                    <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">East</th>
+                    <td style="border: 1px solid #ddd; padding: 8px;">東</td>
+                  </tr>
+                  <tr>
+                    <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">South</th>
+                    <td style="border: 1px solid #ddd; padding: 8px;">南</td>
+                  </tr>
+                  <tr>
+                    <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">West</th>
+                    <td style="border: 1px solid #ddd; padding: 8px;">西</td>
+                  </tr>
+                  <tr>
+                    <th style="text-align: left; border: 1px solid #ddd; padding: 8px;">North</th>
+                    <td style="border: 1px solid #ddd; padding: 8px;">北</td>
+                  </tr>
+                </table>
+              
+                <table style="border-collapse: collapse; background-color: #0f172a; display: inline-table; margin-left: 10px;">
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Tiles Left</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">残牌</td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Wind Round</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">場</td>
+                  </tr>
+                  <tr>
+                    <td style="border: 1px solid #ddd; padding: 8px;">Furiten</td>
+                    <td style="border: 1px solid #ddd; padding: 8px;">振聴</td>
+                  </tr>
+                </table>
+            </div>
+
+            <br>
+            <div class="main-half-to-breakout-end" style="text-align: right;">
+                Can you explain furiten?
+            </div>
+
+            <br>
+            <div class="breakout-start-to-main-half">
+                Most players find Furiten confusing and don't understand why they can't Ron. The scoring calculator will tell you your shanten, "n to Tenpai". After you are Tenpai, it will tell your winning tiles and score if you Ron or Tsumo. For Example:
+                <br><br>
+                <figcaption style="font-style: italic;">34567m222333p88s</figcaption>
+                <img src="assets/tenpaihand.jpg" alt="34567m222333p88s" style="height: auto; max-width: 450px;">
+                <figcaption style="font-style: italic;">Right Sidebar</figcaption>
+                <img src="assets/tenpaiwaits.jpg" alt="tenpai waits" style="height: auto; max-width: 350px;">
+                <br>
+                <strong style="color: #E0FFFF;">If any of the tiles you are waiting for while in Tenpai are in your discards you are in discard furiten and unable to Ron the winning tile.</strong> You may either wait to draw your winning tile and call Tsumo or change your hand and your waits.        
+            </div>
+
+            <br>
+            <div class="main-half-to-breakout-end" style="text-align: right;">
+                How did you represent your hand like: 34567m222333p88s?
+            </div>
+
+            <br>
+            <div class="breakout-start-to-main-half">
+                In CUSTOMIZE → CUSTOM HAND you may enter your hand to start the game. 
+                <br><br>
+                <figcaption style="font-style: italic;">1234506789m - 'm' is Man 萬 tiles</figcaption>
+                <img src="assets/man.jpg" alt="1234506789m" style="height: auto; max-width: 450px;">
+                <br>
+                <figcaption style="font-style: italic;">1234506789p - 'p' is Pin 筒 tiles</figcaption>
+                <img src="assets/pin.jpg" alt="1234506789p" style="height: auto; max-width: 450px;">
+                <br>
+                <figcaption style="font-style: italic;">1234506789s - 's' is So 索 tiles</figcaption>
+                <img src="assets/sou.jpg" alt="34567m222333p88s" style="height: auto; max-width: 450px;">
+                <br>
+                <figcaption style="font-style: italic;">1234567z - 'z' is honor tiles, wind 風 and dragon 牌</figcaption>
+                <img src="assets/honor.jpg" alt="1234567z" style="height: auto; max-height: 71px;">
+            </div>
+
+            <br>
+            <div class="main-half-to-breakout-end">
+                I often hear people complain about how <em>unlucky</em> they are? Is this true?
+            </div>
+
+            <br>
+            <div class="breakout-start-to-main-half">
+                After each round your starting shanten will be given to you. Your shanten is a good
+                indicator of whether you will win. Amber has a blogpost about this
+                <a href="https://pathofhouou.blogspot.com/2021/01/analysis-rates-by-starting-shanten.html" target="_blank" rel="noopener noreferrer">
+                  here
+                </a>.
+                <em>"Most hands are 3 or 4 shanten, with 20% being better and 10% being worse"</em>
+                You will see that there is a wide variance of shanten across each round. Learn to play optimal tile efficiency to take advantage of your shanten. Knowing your score can help decide whether to fold and avoid dealing-in. 
+                
+                <br><br>
+                Here are some resources:
+            </div>
+
+            <br>
+            <figure style="grid-column: breakout-start / content-end; margin: 0;">
+                <a href="blob:null/67ccb838-c880-440b-b994-22f3b3b96eb5" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/cheatsheet.jpg" alt="mahjong cheat sheet" style="max-width: 600px;">
+                </a>
+                <figcaption style="font-style: italic; color: #94a3b8;">
+                    Source: <a href="https://github.com/nottinghamgoclub/RiichiCheatSheet/blob/main/Riichi-2.pdf" target="_blank" rel="noopener noreferrer">Koi-Koi</a>
+                </figcaption>
+            </figure>
+  
+            <figure style="grid-column: breakout-start / content-end; margin: 0;">
+                <a href="https://www.reddit.com/r/Mahjong/comments/12ayu73/riichi_scoring_table_with_colorized_score_series/" target="_blank" rel="noopener noreferrer">
+                    <img src="assets/scoresheet.jpg" alt="mahjong cheat sheet" style="max-width: 600px;">
+                </a>
+                <figcaption style="font-style: italic; color: #94a3b8;">
+                    Source: <a href="https://www.reddit.com/r/Mahjong/comments/12ayu73/riichi_scoring_table_with_colorized_score_series/" target="_blank" rel="noopener noreferrer">Konomu</a>
+                </figcaption>
+            </figure>
+
+            <br>
+            <div class="main-half-to-breakout-end">
+                I'm going to do 100 push-ups, 100 sit-ups, 100 squats, 10km run and 10 east-round matches everyday!
+            </div>
+
+            <div class="breakout-start-to-main-half">
+                Good Luck to you! If you have any questions or if the machine is bugging out, contact <a href="https://x.com/luckyguild" target="_blank" rel="noopener noreferrer">
+                    @LuckyGuild
+                  </a>
+            </div>
+
+            <p>
+            <figure style="grid-column: full-width-start / full-width-end; text-align: center;">
+                <img src="assets/guildroom.jpg" alt="exterior of lucky guild bldg" style="max-width: 100%; ">
+                <figcaption style="font-style: italic;">Luck is skill</figcaption>
+            </figure>
+            </p>
+
+        </div>
+            
+        </div>
+
+    </div>
+</body>
+</html>

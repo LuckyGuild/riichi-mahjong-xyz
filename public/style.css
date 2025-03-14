@@ -1,0 +1,324 @@
+/* src/style.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 
+#toggle-results:checked+label .toggleable-section {
+  display: none;
+} */
+
+/* ======================================================================= */
+/*                 BEGIN: 3D Button Styles (Compiled from SCSS)            */
+/* ======================================================================= */
+
+/* (Optionally import Source Code Pro font if you want to use it) */
+/* If you don't need it, remove this line. */
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;700&display=swap");
+
+/* Reset box-model for the button itself -- You may comment these out
+   if you'd rather let Tailwind or nes.css control them.
+*/
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  border-style: solid;
+  border-width: 0;
+}
+
+/* The "3D Button" styles */
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5em;
+  min-height: 100vh;
+  font-family: 'Source Code Pro', sans-serif;
+  font-weight: 900;
+  font-style: normal;
+}
+
+.buttons-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 26em;
+  gap: 1em;
+}
+
+/* Outer black rectangle */
+.button {
+  border: 0.1875em solid transparent;
+  /* was em(3px) => 3/16 => 0.1875em */
+  border-radius: 0.5em;
+  /* was em(8px) => 8/16 => 0.5em */
+  background-color: #010101;
+  box-shadow: 0.0625em 0.0625em 0.0625em rgba(255, 255, 255, 0.6);
+  /* was em(1px) */
+  width: 5.2em;
+}
+
+/* New class specifically for the small button */
+.button-small {
+  transform: scale(0.8);
+}
+
+/* Inner colored face */
+.button-inside {
+  --background-color: #f05a22;
+  --background-color-active: #ee5529;
+  --light-shadow-color: #ffb147;
+  --dark-shadow-color: #d72d12;
+  --text-color: #fff;
+
+  display: inline-block;
+  position: relative;
+  border-radius: 0.5625em;
+  /* was em(9px) => 0.5625em */
+  padding: 0.625em 0.75em;
+  /* was em(10px) => 0.625em; em(12px) => 0.75em */
+  width: 100%;
+
+  background-color: var(--background-color);
+  background-image: '/assets/shrug.png';
+  background-size: 80px 80px;
+
+  box-shadow:
+    inset 0.0625em 0.0625em 0.0625em var(--light-shadow-color),
+    inset -0.0625em -0.0625em 0.0625em var(--dark-shadow-color),
+    0.125em 0.125em 0.25em #000;
+
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-color);
+
+  transition-property: transform, background-color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: cubic-bezier(0.25, 0.5, 0.5, 1);
+}
+
+/* Pressed/active state */
+.button:active .button-inside {
+  transform: scale(0.98);
+  background-color: var(--background-color-active);
+  box-shadow:
+    inset 0 0 0.25em #000,
+    /* was em(4px) => 0.25em */
+    inset 0.0625em 0.0625em 0.0625em transparent,
+    inset -0.0625em -0.0625em 0.0625em transparent,
+    0.125em 0.125em 0.25em transparent;
+}
+
+/* Alternate colors */
+.button-inside.dark-gray {
+  --background-color: #353535;
+  --background-color-active: #313030;
+  --light-shadow-color: #a7a7a7;
+  --dark-shadow-color: #1c1c1c;
+}
+
+.button-inside.white {
+  --background-color: #cfcbca;
+  --background-color-active: #b9b5b3;
+  --light-shadow-color: #fafafa;
+  --dark-shadow-color: #646464;
+  --text-color: #010101;
+}
+
+.button-inside.light-gray {
+  --background-color: #bcbcbc;
+  --background-color-active: #b1adad;
+  --light-shadow-color: #f7f7f7;
+  --dark-shadow-color: #646464;
+}
+
+.button-inside.gray {
+  --background-color: #676767;
+  --background-color-active: #575454;
+  --light-shadow-color: #b8b7b5;
+  --dark-shadow-color: #383838;
+}
+
+.button-inside.red {
+  --background-color: #d52d21;
+  --background-color-active: #c1281a;
+  --light-shadow-color: #ff9d84;
+  --dark-shadow-color: #9f190e;
+}
+
+.button-inside.bo {
+  --background-color: #FFAE42;
+  --background-color-active: #E59D3C;
+  --light-shadow-color: #FFD27F;
+  --dark-shadow-color: #B26108;
+  --text-color: #010101;
+}
+
+.button-inside.tr {
+  --background-color: #FF5349;
+  --background-color-active: #E64B42;
+  --light-shadow-color: #FF968E;
+  --dark-shadow-color: #C62B1C;
+}
+
+.button-inside.green {
+  --background-color: #487423;
+  --background-color-active: #3F661E;
+  --light-shadow-color: #99B871;
+  --dark-shadow-color: #20370F;
+}
+
+/* Wider */
+/* red */
+.button.vr {
+  width: 7.3em;
+}
+
+.button-inside.vr {
+  --background-color: #EB0A1E;
+  --background-color-active: #D40A19;
+  --light-shadow-color: #FF677A;
+  --dark-shadow-color: #9B0811;
+  white-space: nowrap;
+  width: 7em;
+}
+
+/* green */
+.button.vg {
+  width: 6.3em;
+}
+
+.button-inside.vg {
+  --background-color: #487423;
+  --background-color-active: #3F661E;
+  --light-shadow-color: #99B871;
+  --dark-shadow-color: #20370F;
+  white-space: nowrap;
+  width: 6em;
+}
+
+/* shorter */
+.button.short {
+  width: 3.3em;
+}
+
+.button-inside.short {
+  --background-color: #487423;
+  --background-color-active: #3F661E;
+  --light-shadow-color: #99B871;
+  --dark-shadow-color: #20370F;
+  width: 3em;
+}
+
+/* ======================================================================= */
+/*                 END: 3D Button Styles                                   */
+/* ======================================================================= */
+
+/* ========================================= */
+/* Styles from inline HTML (Home Page) */
+/* ========================================= */
+
+body {
+  background: #162444;
+  font-family: 'Source Code Pro', monospace;
+  margin: 0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 100vh;
+}
+
+#content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Center content vertically */
+  flex-grow: 1;
+  /* Allow content to take up available space */
+}
+
+.bezel-container {
+  position: relative;
+  background-color: #222;
+  /* gray-500 */
+  border-top-left-radius: 1rem;
+  border-top-right-radius: 1rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  padding-top: 8px;
+  padding-right: 11px;
+  padding-bottom: 0;
+  padding-left: 11px;
+  margin-bottom: 0px;
+  overflow: hidden;
+}
+
+#ascii-container {
+  overflow: hidden;
+  text-align: center;
+  background: #000000;
+  display: inline-block;
+  align-self: center;
+  /* Center vertically */
+}
+
+#ascii-output {
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+  font-size: 5px;
+  line-height: 5px;
+  white-space: pre;
+  opacity: 1;
+}
+
+.footer-content {
+  display: flex;
+  justify-content: space-between;
+  /* Distribute items */
+  align-items: center;
+  /* Vertically align */
+  color: #6B7280;
+  font-size: 12px;
+  width: 900px;
+}
+
+.footer-content a {
+  color: #6B7280;
+  text-decoration: none;
+  white-space: nowrap;
+  white-space: nowrap;
+}
+
+.left-section {
+  text-align: left;
+}
+
+/* For the Twitter icon */
+.middle-section svg {
+  height: 12px;
+  width: 12px;
+  vertical-align: middle;
+}
+
+.middle-section {
+  text-align: center;
+
+}
+
+.right-section {
+  text-align: right;
+
+}
+
+
+
+
+/* ========================================= */
+/* End Styles from inline HTML             */
+/* ========================================= */
